@@ -1,0 +1,43 @@
+# DriftCheck Configuration
+# All keys are optional; env override DRIFTCHECK_<SECTION>_<KEY>
+# e.g. DRIFTCHECK_LLM_MODE=local
+
+[general]
+fail_on = "high"                 # critical|high|medium|low|none
+report_gaps = false
+
+[docs]
+globs = ["docs/**/*.md", "docs/**/*.mdx", "docs/**/*.rst", "docs/**/*.txt", "README*"]
+exclude = ["**/CHANGELOG*", "**/HISTORY*", "**/RELEASE*", "node_modules/**", ".venv/**", "site/**", "_build/**"]
+high_traffic_patterns = ["quickstart", "getting-started", "install", "README"]
+
+[code]
+ignore_globs = ["tests/**", "**/migrations/**", "**/vendor/**"]
+config_globs = [".env.example", "**/*.example.*", "**/config*.{yml,yaml,toml,json,ini}", "**/defaults*.*", "**/settings*.*"]
+
+[search]
+max_candidates_per_fact = 12
+bm25_top_k = 5
+bm25_min_score = 0.35
+weak_words = ["timeout", "name", "path", "debug", "port", "host", "verbose", "config", "output", "mode"]
+
+[llm]
+mode = "none"                    # none|local|full
+tier2_base_url = "http://127.0.0.1:8080/v1"
+tier2_model = "qwen3-4b"         # name as served by llama.cpp / ollama ("qwen3:4b")
+tier2_min_confidence = 0.6
+tier2_max_sentences = 6
+tier2_max_calls = 40
+verify_base_url = "https://integrate.api.nvidia.com/v1"
+verify_model = "nvidia/nemotron-3-ultra-550b-a55b"
+verify_concurrency = 2
+timeout_s = 60
+cache = true
+
+[output]
+max_annotations = 25
+max_findings_in_comment = 15
+
+[hook]
+llm = "none"
+block_on = "none"                # none|critical|high
