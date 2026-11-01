@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # DriftCheck
 
 > **Automated Documentation Drift Detection**
@@ -64,3 +65,7 @@ This project was built with:
 ## License
 
 MIT License - see LICENSE file for details.
+=======
+# pr-line-checker
+This is a repo for a tool that tells what line of README.md just changed or broke after a pull request
+>>>>>>> origin/main
